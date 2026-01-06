@@ -4,7 +4,7 @@ name: Build and Deploy
 on:
   push:
     branches:
-      - main # 當代碼推送到 main 分支時觸發
+      - main
 
 permissions:
   contents: write
@@ -21,7 +21,6 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 20
-          # 移除 cache: 'npm' 以免因為缺少 package-lock.json 而出錯
 
       - name: Install Dependencies
         run: npm install
