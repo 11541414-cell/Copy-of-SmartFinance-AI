@@ -1,13 +1,13 @@
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
 
-// 從環境變數讀取
+// 從環境變數讀取，Vite 編譯時注入
 const API_KEY = process.env.API_KEY || '';
 const FIREBASE_CONFIG = process.env.FIREBASE_CONFIG || '';
 
 export default defineConfig({
   plugins: [react()],
-  base: './', // 相容 GitHub Pages
+  base: './', // 確保在 GitHub Pages 子路徑下資源能正確載入
   define: {
     'process.env.API_KEY': JSON.stringify(API_KEY),
     'process.env.FIREBASE_CONFIG': JSON.stringify(FIREBASE_CONFIG)
@@ -17,7 +17,7 @@ export default defineConfig({
     minify: 'terser',
     terserOptions: {
       compress: {
-        drop_console: false,
+        drop_console: false, // 保留日誌方便除錯
       },
     },
     rollupOptions: {
