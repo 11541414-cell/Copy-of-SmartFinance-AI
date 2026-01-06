@@ -2,17 +2,20 @@
 import React, { useState } from 'react';
 import { useAppContext } from '../context/AppContext';
 import { Plus, Trash2, Search, Filter } from 'lucide-react';
+// Import TransactionType for explicit state typing
+import { TransactionType } from '../types';
 
 const Transactions: React.FC = () => {
   const { transactions, accounts, categories, addTransaction, deleteTransaction } = useAppContext();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [searchTerm, setSearchTerm] = useState('');
 
+  // Fixed: Cast initial type as TransactionType to allow switching between 'EXPENSE' and 'INCOME'
   const [formData, setFormData] = useState({
     accountId: accounts[0]?.id || '',
     categoryId: categories[0]?.id || '',
     amount: 0,
-    type: 'EXPENSE' as const,
+    type: 'EXPENSE' as TransactionType,
     date: new Date().toISOString().split('T')[0],
     note: ''
   });
