@@ -124,7 +124,8 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
         return a;
       }));
     } else if (user && currentDb) {
-      await addDoc(collection(currentDb, 'accounts'), { ...t, userId: user.uid });
+      // 修正：從 'accounts' 改為 'transactions'
+      await addDoc(collection(currentDb, 'transactions'), { ...t, userId: user.uid });
     }
   };
 
